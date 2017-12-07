@@ -27,9 +27,10 @@ public class Day1 {
 
 		int size = digits.size();
 		int sum = 0;
+		int steps = size / 2;  // Number of digits always an even number
 
 		for (int i = 0; i < size; i++) {
-			if (digits.get((i + 1) % size) == digits.get(i)) {
+			if (digits.get((i + steps) % size) == digits.get(i)) {
 				sum = sum + digits.get(i);
 			}
 		}
