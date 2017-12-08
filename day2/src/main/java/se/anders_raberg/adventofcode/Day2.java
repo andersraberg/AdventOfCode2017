@@ -30,14 +30,22 @@ public class Day2 {
 
 
 			// Calculate checksum
-			Integer checksum = table.stream()
-					.map(line -> 
-					line.stream().max(Integer::compare).get() - 
-					line.stream().min(Integer::compare).get())
-					.reduce(0, (result, element) -> result + element);
+			Integer checksum = table.stream().mapToInt(Day2::processLine).sum();
 
 			LOGGER.log(Level.INFO, "Checksum : {0}", checksum);
 		} 
 
+	}
+	
+	private static Integer processLine(List<Integer> line) {
+		for (int a : line) {
+			for (int b : line) {
+				if (a != b && a % b == 0) {
+					return a / b;
+				}
+			}
+		}
+		
+		throw new IllegalArgumentException("No suitable numbers found");
 	}
 }
