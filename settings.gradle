@@ -7,4 +7,5 @@ include 'day4a'
 include 'day4b'
 include 'day5a'
 include 'day5b'
+include 'day6a'
 
