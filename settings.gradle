@@ -1,12 +1,3 @@
 rootProject.name = 'AdventOfCode2017'
-include 'day1'
-include 'day2'
-include 'day3'
-include 'day3b'
-include 'day4a'
-include 'day4b'
-include 'day5a'
-include 'day5b'
-include 'day6a'
-include 'day6b'
+include 'days'
 
