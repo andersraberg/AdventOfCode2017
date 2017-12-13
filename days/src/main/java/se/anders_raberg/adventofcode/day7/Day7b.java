@@ -33,18 +33,14 @@ public class Day7b {
 				.collect(Collectors.toList());
 
 		List<String> allProgramNames = new ArrayList<>(programs.keySet());
-
 		allProgramNames.removeAll(programNamesNotAtRoot);
-
 		String rootName = allProgramNames.get(0);
-
 		treeWeight(programs, programs.get(rootName));
 	}
 
 
 	private static int treeWeight(Map<String, Program> programs, Program program) {
 		List<String> subtree = program.getSubprograms();
-		
 		List<Integer> subtreeWeights = subtree
 				.stream()
 				.map(s -> treeWeight(programs, programs.get(s)))
@@ -54,7 +50,6 @@ public class Day7b {
 			LOGGER.log(Level.INFO, "{0}", prettyPrintSubtree(programs, subtree, subtreeWeights));
 			System.exit(0);
 		}
-
 		return program.getWeight() + subtreeWeights.stream().mapToInt(Integer::valueOf).sum();
 	}
 
@@ -65,7 +60,6 @@ public class Day7b {
 			int weight = programs.get(subtree.get(i)).getWeight();
 			sb.append(subtree.get(i) + " (" + weight + "/" + subtreeWeights.get(i) + ") ");
 		}
-		
 		return sb.toString();
 	}
 }
