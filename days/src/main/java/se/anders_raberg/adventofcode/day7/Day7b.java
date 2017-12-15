@@ -48,7 +48,6 @@ public class Day7b {
 
 		if (subtreeWeights.stream().distinct().count() > 1) {
 			LOGGER.log(Level.INFO, "{0}", prettyPrintSubtree(programs, subtree, subtreeWeights));
-			System.exit(0);
 		}
 		return program.getWeight() + subtreeWeights.stream().mapToInt(Integer::valueOf).sum();
 	}

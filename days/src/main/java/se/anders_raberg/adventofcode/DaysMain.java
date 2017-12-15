@@ -16,6 +16,7 @@ import se.anders_raberg.adventofcode.day6.Day6a;
 import se.anders_raberg.adventofcode.day6.Day6b;
 import se.anders_raberg.adventofcode.day7.Day7a;
 import se.anders_raberg.adventofcode.day7.Day7b;
+import se.anders_raberg.adventofcode.day8.Day8a;
 
 public class DaysMain {
 	private static final String INPUT_PATH = 
@@ -36,5 +37,6 @@ public class DaysMain {
 		Day6b.run(INPUT_PATH);
 		Day7a.run(INPUT_PATH);
 		Day7b.run(INPUT_PATH);
+		Day8a.run(INPUT_PATH);
 	}
 }

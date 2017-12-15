@@ -20,6 +20,7 @@ public class Program {
 		return Collections.unmodifiableList(_subprograms);
 	}
 	
+	@Override
 	public String toString() {
 		return _weight + " : " + _subprograms;
 	}
