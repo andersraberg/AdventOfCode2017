@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import se.anders_raberg.adventofcode.day1.Day1a;
 import se.anders_raberg.adventofcode.day1.Day1b;
+import se.anders_raberg.adventofcode.day10.Day10a;
 import se.anders_raberg.adventofcode.day2.Day2a;
 import se.anders_raberg.adventofcode.day2.Day2b;
 import se.anders_raberg.adventofcode.day3.Day3a;
@@ -44,5 +45,6 @@ public class DaysMain {
 		Day8b.run(INPUT_PATH);
 		Day9a.run(INPUT_PATH);
 		Day9b.run(INPUT_PATH);
+		Day10a.run(INPUT_PATH);
 	}
 }
