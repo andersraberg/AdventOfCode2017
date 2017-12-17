@@ -6,6 +6,8 @@ import se.anders_raberg.adventofcode.day1.Day1a;
 import se.anders_raberg.adventofcode.day1.Day1b;
 import se.anders_raberg.adventofcode.day10.Day10a;
 import se.anders_raberg.adventofcode.day10.Day10b;
+import se.anders_raberg.adventofcode.day11.Day11a;
+import se.anders_raberg.adventofcode.day11.Day11b;
 import se.anders_raberg.adventofcode.day2.Day2a;
 import se.anders_raberg.adventofcode.day2.Day2b;
 import se.anders_raberg.adventofcode.day3.Day3a;
@@ -48,5 +50,7 @@ public class DaysMain {
 		Day9b.run(INPUT_PATH);
 		Day10a.run(INPUT_PATH);
 		Day10b.run(INPUT_PATH);
+		Day11a.run(INPUT_PATH);
+		Day11b.run(INPUT_PATH);
 	}
 }
