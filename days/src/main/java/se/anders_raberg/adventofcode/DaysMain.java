@@ -21,6 +21,7 @@ import se.anders_raberg.adventofcode.day16.Day16b;
 import se.anders_raberg.adventofcode.day17.Day17a;
 import se.anders_raberg.adventofcode.day17.Day17b;
 import se.anders_raberg.adventofcode.day18.Day18a;
+import se.anders_raberg.adventofcode.day18.Day18b;
 import se.anders_raberg.adventofcode.day2.Day2a;
 import se.anders_raberg.adventofcode.day2.Day2b;
 import se.anders_raberg.adventofcode.day3.Day3a;
@@ -41,7 +42,7 @@ import se.anders_raberg.adventofcode.day9.Day9b;
 public class DaysMain {
     private static final String INPUT_PATH = System.getProperty("se.anders_raberg.adventofcode.inputFilePath");
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         Day1a.run(INPUT_PATH);
         Day1b.run(INPUT_PATH);
         Day2a.run(INPUT_PATH);
@@ -77,5 +78,6 @@ public class DaysMain {
         Day17a.run();
         Day17b.run();
         Day18a.run(INPUT_PATH);
+        Day18b.run(INPUT_PATH);
     }
 }
