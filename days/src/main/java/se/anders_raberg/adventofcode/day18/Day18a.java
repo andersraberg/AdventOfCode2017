@@ -14,35 +14,26 @@ import java.util.stream.Stream;
 
 public class Day18a {
     private static final Logger LOGGER = Logger.getLogger(Day18a.class.getName());
-    private static final Map<String, Integer> REGISTERS = new HashMap<>();
+    private static final Map<String, Long> REGISTERS = new HashMap<>();
 
     public static void run(String inputPath) throws IOException {
         List<List<String>> instructions = new ArrayList<>();
 
         try (Stream<String> input = Files.lines(Paths.get(inputPath + "/input18.txt"))) {
             input.forEach(l -> {
-                List<String> parsedLine = Arrays
-                        .stream(l.split("\\s+"))
-                        .collect(Collectors.toList());
+                List<String> parsedLine = Arrays.stream(l.split("\\s+")).collect(Collectors.toList());
 
                 instructions.add(parsedLine);
 
             });
         }
 
-//        instructions.forEach(l -> {
-//            l.forEach(x -> System.out.print(":" + x));
-//            System.out.println("");
-//        });
-
-        int lastPlayedSoundFreq = 0;
+        long lastPlayedSoundFreq = 0;
         boolean recoveredSoundFreq = false;
-        int instructionCounter = 0;
+        long instructionCounter = 0;
         while (!recoveredSoundFreq) {
-            List<String> instr = instructions.get(instructionCounter);
-            
-            System.out.print((instructionCounter + 1) + ": " + instr);
-            
+            List<String> instr = instructions.get((int) instructionCounter);
+
             switch (instr.get(0)) {
             case "snd":
                 lastPlayedSoundFreq = value(instr.get(1));
@@ -80,24 +71,16 @@ public class Day18a {
             default:
                 throw new IllegalArgumentException(instr.get(0));
             }
-            System.out.println(" : " + REGISTERS);
-//            try {
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                // TODO Auto-generated catch block
-//                e.printStackTrace();
-//            }
-        
         }
 
-        System.out.println("lastPlayedSoudFreq: " + lastPlayedSoundFreq);
+        LOGGER.info("lastPlayedSoudFreq: " + lastPlayedSoundFreq);
     }
 
-    private static int value(String s) {
-        if (s.matches("-?\\d+")) {
-            return Integer.parseInt(s);
+    private static long value(String s) {
+        if (s.matches("[a-z]")) {
+            return REGISTERS.getOrDefault(s, 0L);
         }
-        return REGISTERS.getOrDefault(s, 0); 
+        return Integer.parseInt(s);
     }
 
 }
