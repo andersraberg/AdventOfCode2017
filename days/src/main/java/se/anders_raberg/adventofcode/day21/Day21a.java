@@ -32,17 +32,38 @@ public class Day21a {
             ArtPattern p1 = parse(matcher_rule.group(1));
             ArtPattern p2 = parse(matcher_rule.group(2));
             
-            ArtPattern flippedp1 = p1.getVerticallyFlipped();
-            
             for (int i = 0; i < 3; i++) {
                 _ruleBook.put(p1, p2);
-                _ruleBook.put(flippedp1, p2);
+                _ruleBook.put(p1.getVerticallyFlipped(), p2);
                 p1 = p1.getRotated();
-                flippedp1 = flippedp1.getRotated();
             }
         }
         
-        System.out.println(_ruleBook.keySet());
+
+        String[][] start = {
+                {".", "#", "."},
+                {".", ".", "#"},
+                {"#", "#", "#"}};
+        
+        ArtPattern grid = new ArtPattern(start);
+
+        
+        ArtPattern next = _ruleBook.get(grid);
+//        System.out.println(next);
+        
+        ArtPattern subPattern = next.subPattern(2, 2, 2, 2);
+        
+//        System.out.println(subPattern);
+        
+        ArtPattern[][] toJoin = {
+                {grid, grid, grid},
+                {grid, grid, grid},
+                {grid, grid, grid}};
+        
+        ArtPattern joinPatterns = ArtPattern.joinPatterns(toJoin);
+        System.out.println("------");
+        System.out.println(grid);
+        System.out.println(joinPatterns);
     }
 
     private static ArtPattern parse(String rulePatternString) {
