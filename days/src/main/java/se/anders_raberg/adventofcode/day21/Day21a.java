@@ -3,6 +3,7 @@ package se.anders_raberg.adventofcode.day21;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,23 +48,51 @@ public class Day21a {
         
         ArtPattern grid = new ArtPattern(start);
 
+        String[][] start2 = {
+                {".", "#", ".", "#"},
+                {".", ".", ".", "#"},
+                {".", "#", ".", "#"},
+                {".", ".", ".", "#"}};
+        
+        ArtPattern grid2 = new ArtPattern(start2);
+        
+        System.out.println(grid2);
+        
+        
+       ArtPattern[][] split = grid2.split();
+       
+
+       for (int i = 0; i < split.length; i++) {
+           for (int j = 0; j < split.length; j++) {
+               System.out.println(split[i][j]);
+           }
+       }
+        
         
         ArtPattern next = _ruleBook.get(grid);
 //        System.out.println(next);
         
-        ArtPattern subPattern = next.subPattern(2, 2, 2, 2);
+//        ArtPattern subPattern = next.subPattern(2, 2, 2, 2);
         
 //        System.out.println(subPattern);
         
-        ArtPattern[][] toJoin = {
-                {grid, grid, grid},
-                {grid, grid, grid},
-                {grid, grid, grid}};
-        
-        ArtPattern joinPatterns = ArtPattern.joinPatterns(toJoin);
-        System.out.println("------");
-        System.out.println(grid);
-        System.out.println(joinPatterns);
+//        ArtPattern[][] toJoin = {
+//                {grid, grid, grid},
+//                {grid, grid, grid},
+//                {grid, grid, grid}};
+//        
+//        ArtPattern[][] toJoin2 = {
+//                {grid2, grid2},
+//                {grid2, grid2}};
+//
+//        ArtPattern joinPatterns = ArtPattern.joinPatterns(toJoin);
+//        System.out.println("------");
+//        System.out.println(grid);
+//        System.out.println(joinPatterns);
+//        ArtPattern joinPatterns2 = ArtPattern.joinPatterns(toJoin2);
+//        System.out.println("------");
+//        System.out.println(grid2);
+//        System.out.println(joinPatterns2);
     }
 
     private static ArtPattern parse(String rulePatternString) {

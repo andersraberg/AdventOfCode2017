@@ -33,7 +33,30 @@ public class ArtPattern {
         }
         return new ArtPattern(result);
     }
+    
+    public ArtPattern[][] split() {
+        ArtPattern[][] result;
+        int size;
+        if (_pattern.length % 3 == 0) {
+            result = new ArtPattern[3][3];
+            size = _pattern.length / 3;
+        } else if (_pattern.length % 2 == 0) {
+            result = new ArtPattern[2][2];            
+            size = _pattern.length / 2;
+        } else {
+            throw new IllegalStateException();
+        }
 
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result.length; j++) {
+                result[i][j] = subPattern(i * size, j * size, size, size);
+            }
+        }
+        
+        return result;
+    }
+    
+    
     public ArtPattern subPattern(int x, int y, int dx, int dy) {
         String[][] subPatt = new String[dx][dy];
 
@@ -48,9 +71,6 @@ public class ArtPattern {
     public static ArtPattern joinPatterns(ArtPattern[][] patterns) {
         int partDimension = patterns[0][0]._pattern[0].length;
         int joinedDimension = patterns.length * partDimension;
-        System.out.println("P1: " + patterns.length);
-        System.out.println("p2: " + patterns[0].length);
-        System.out.println("Q: "+ joinedDimension);
         String[][] joined = new String[joinedDimension][joinedDimension];
         for (int i = 0; i < patterns.length; i++) {
             for (int j = 0; j < patterns.length; j++) {
