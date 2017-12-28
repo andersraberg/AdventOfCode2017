@@ -33,19 +33,22 @@ public class ArtPattern {
         }
         return new ArtPattern(result);
     }
-    
+
     public ArtPattern[][] split() {
         ArtPattern[][] result;
         int size;
+        int numberOfPieces;
         if (_pattern.length == 2 || _pattern.length == 3) {
             result = new ArtPattern[1][1];
             size = _pattern.length;
         } else if (_pattern.length % 3 == 0) {
-            result = new ArtPattern[3][3];
-            size = _pattern.length / 3;
+            numberOfPieces = _pattern.length / 3;
+            result = new ArtPattern[numberOfPieces][numberOfPieces];
+            size = _pattern.length / numberOfPieces;
         } else if (_pattern.length % 2 == 0) {
-            result = new ArtPattern[2][2];            
-            size = _pattern.length / 2;
+            numberOfPieces = _pattern.length /2;
+            result = new ArtPattern[numberOfPieces][numberOfPieces];            
+            size = _pattern.length / numberOfPieces;
         } else {
             throw new IllegalStateException();
         }

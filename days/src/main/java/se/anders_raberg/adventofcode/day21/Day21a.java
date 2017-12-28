@@ -33,9 +33,10 @@ public class Day21a {
             ArtPattern p1 = parse(matcher_rule.group(1));
             ArtPattern p2 = parse(matcher_rule.group(2));
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 5; i++) {
                 _ruleBook.put(p1, p2);
-                _ruleBook.put(p1.getVerticallyFlipped(), p2);
+                ArtPattern p1flipped = p1.getVerticallyFlipped();
+                _ruleBook.put(p1flipped, p2);
                 p1 = p1.getRotated();
             }
         }
@@ -50,13 +51,21 @@ public class Day21a {
 
         for (int c = 0; c < 5; c++) {
             ArtPattern[][] split = grid.split();
+            System.out.println(grid);
             ArtPattern[][] transformedSplit = new ArtPattern[split.length][split.length];
             for (int i = 0; i < split.length; i++) {
                 for (int j = 0; j < split.length; j++) {
                     transformedSplit[i][j] = _ruleBook.get(split[i][j]);
+                    if (transformedSplit[i][j] == null) {
+                        System.out.println(split[i][j]);
+                        throw new IllegalArgumentException();
+                    }
+//                    System.out.println(transformedSplit[i][j]);
                 }
             }
             grid = ArtPattern.joinPatterns(transformedSplit);
+//            System.out.println("c: " +c);
+//            System.out.println(grid);
         }
         
 //        System.out.println(Arrays.toString(grid.toString().split("")));
