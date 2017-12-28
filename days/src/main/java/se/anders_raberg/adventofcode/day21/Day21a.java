@@ -3,6 +3,7 @@ package se.anders_raberg.adventofcode.day21;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,38 +48,20 @@ public class Day21a {
 
         ArtPattern grid = new ArtPattern(start);
 
-        ArtPattern[][] split = grid.split();
-        ArtPattern[][] transformedSplit = new ArtPattern[split.length][split.length];
-        
-        for (int i = 0; i < split.length; i++) {
-            for (int j = 0; j < split.length; j++) {
-//                System.out.println(i + ":" + j);
-//                System.out.println(split[i][j]);
-                transformedSplit[i][j]= _ruleBook.get(split[i][j]);
-//                System.out.println(transformedSplit[i][j]);
+        for (int c = 0; c < 5; c++) {
+            ArtPattern[][] split = grid.split();
+            ArtPattern[][] transformedSplit = new ArtPattern[split.length][split.length];
+            for (int i = 0; i < split.length; i++) {
+                for (int j = 0; j < split.length; j++) {
+                    transformedSplit[i][j] = _ruleBook.get(split[i][j]);
+                }
             }
-        }
-        System.out.println(transformedSplit[0][0]);
-        grid = ArtPattern.joinPatterns(transformedSplit);
-
-
-        System.out.println(grid);
-        System.out.println("//////////////////////");
-        split = grid.split();
-        transformedSplit = new ArtPattern[split.length][split.length];
-        
-        for (int i = 0; i < split.length; i++) {
-            for (int j = 0; j < split.length; j++) {
-//                System.out.println(i + ":" + j);
-//                System.out.println(split[i][j]);
-                transformedSplit[i][j]= _ruleBook.get(split[i][j]);
-//                System.out.println(transformedSplit[i][j]);
-            }
+            grid = ArtPattern.joinPatterns(transformedSplit);
         }
         
-        grid = ArtPattern.joinPatterns(transformedSplit);
-
-
+//        System.out.println(Arrays.toString(grid.toString().split("")));
+        long count = Arrays.stream(grid.toString().split("")).filter(s -> s.equals("#")).count();
+        System.out.println(count);
         System.out.println(grid);
     }
 
