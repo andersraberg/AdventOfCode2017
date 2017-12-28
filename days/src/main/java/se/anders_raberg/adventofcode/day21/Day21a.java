@@ -31,67 +31,55 @@ public class Day21a {
             matcher_rule.find();
             ArtPattern p1 = parse(matcher_rule.group(1));
             ArtPattern p2 = parse(matcher_rule.group(2));
-            
+
             for (int i = 0; i < 3; i++) {
                 _ruleBook.put(p1, p2);
                 _ruleBook.put(p1.getVerticallyFlipped(), p2);
                 p1 = p1.getRotated();
             }
         }
-        
+
 
         String[][] start = {
                 {".", "#", "."},
                 {".", ".", "#"},
                 {"#", "#", "#"}};
-        
+
         ArtPattern grid = new ArtPattern(start);
 
-        String[][] start2 = {
-                {".", "#", ".", "#"},
-                {".", ".", ".", "#"},
-                {".", "#", ".", "#"},
-                {".", ".", ".", "#"}};
+        ArtPattern[][] split = grid.split();
+        ArtPattern[][] transformedSplit = new ArtPattern[split.length][split.length];
         
-        ArtPattern grid2 = new ArtPattern(start2);
-        
-        System.out.println(grid2);
-        
-        
-       ArtPattern[][] split = grid2.split();
-       
+        for (int i = 0; i < split.length; i++) {
+            for (int j = 0; j < split.length; j++) {
+//                System.out.println(i + ":" + j);
+//                System.out.println(split[i][j]);
+                transformedSplit[i][j]= _ruleBook.get(split[i][j]);
+//                System.out.println(transformedSplit[i][j]);
+            }
+        }
+        System.out.println(transformedSplit[0][0]);
+        grid = ArtPattern.joinPatterns(transformedSplit);
 
-       for (int i = 0; i < split.length; i++) {
-           for (int j = 0; j < split.length; j++) {
-               System.out.println(split[i][j]);
-           }
-       }
+
+        System.out.println(grid);
+        System.out.println("//////////////////////");
+        split = grid.split();
+        transformedSplit = new ArtPattern[split.length][split.length];
         
+        for (int i = 0; i < split.length; i++) {
+            for (int j = 0; j < split.length; j++) {
+//                System.out.println(i + ":" + j);
+//                System.out.println(split[i][j]);
+                transformedSplit[i][j]= _ruleBook.get(split[i][j]);
+//                System.out.println(transformedSplit[i][j]);
+            }
+        }
         
-        ArtPattern next = _ruleBook.get(grid);
-//        System.out.println(next);
-        
-//        ArtPattern subPattern = next.subPattern(2, 2, 2, 2);
-        
-//        System.out.println(subPattern);
-        
-//        ArtPattern[][] toJoin = {
-//                {grid, grid, grid},
-//                {grid, grid, grid},
-//                {grid, grid, grid}};
-//        
-//        ArtPattern[][] toJoin2 = {
-//                {grid2, grid2},
-//                {grid2, grid2}};
-//
-//        ArtPattern joinPatterns = ArtPattern.joinPatterns(toJoin);
-//        System.out.println("------");
-//        System.out.println(grid);
-//        System.out.println(joinPatterns);
-//        ArtPattern joinPatterns2 = ArtPattern.joinPatterns(toJoin2);
-//        System.out.println("------");
-//        System.out.println(grid2);
-//        System.out.println(joinPatterns2);
+        grid = ArtPattern.joinPatterns(transformedSplit);
+
+
+        System.out.println(grid);
     }
 
     private static ArtPattern parse(String rulePatternString) {
@@ -104,7 +92,7 @@ public class Day21a {
                     matcher4.group(4).split("")};
             return new ArtPattern(p);
         };
-        
+
         Matcher matcher3 = PATTERN3.matcher(rulePatternString);
         if (matcher3.find()) {
             String[][] p  = {
@@ -113,7 +101,7 @@ public class Day21a {
                     matcher3.group(3).split("")};
             return new ArtPattern(p);
         };
-        
+
         Matcher matcher2 = PATTERN2.matcher(rulePatternString);
         if (matcher2.find()) {
             String[][] p  = {
@@ -121,7 +109,7 @@ public class Day21a {
                     matcher2.group(2).split("")};
             return new ArtPattern(p);
         };
-        
+
         throw new IllegalArgumentException();
     }
 

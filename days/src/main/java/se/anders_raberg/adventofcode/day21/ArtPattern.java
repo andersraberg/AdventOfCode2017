@@ -37,7 +37,10 @@ public class ArtPattern {
     public ArtPattern[][] split() {
         ArtPattern[][] result;
         int size;
-        if (_pattern.length % 3 == 0) {
+        if (_pattern.length == 2 || _pattern.length == 3) {
+            result = new ArtPattern[1][1];
+            size = _pattern.length;
+        } else if (_pattern.length % 3 == 0) {
             result = new ArtPattern[3][3];
             size = _pattern.length / 3;
         } else if (_pattern.length % 2 == 0) {
@@ -71,13 +74,17 @@ public class ArtPattern {
     public static ArtPattern joinPatterns(ArtPattern[][] patterns) {
         int partDimension = patterns[0][0]._pattern[0].length;
         int joinedDimension = patterns.length * partDimension;
+//        System.out.println(patterns.length + ":" + patterns[0].length + ":"+ partDimension + ":" + joinedDimension);
         String[][] joined = new String[joinedDimension][joinedDimension];
         for (int i = 0; i < patterns.length; i++) {
             for (int j = 0; j < patterns.length; j++) {
                 for (int i2 = 0; i2 < partDimension; i2++) {
                     for (int j2 = 0; j2 < partDimension; j2++) {
-                        joined[i * patterns.length + i2][j * patterns.length + j2] 
+                        joined[i * partDimension + i2][j * partDimension + j2] 
                                 = patterns[i][j]._pattern[i2][j2];
+                        
+//                        System.out.println(i + ":" + j + ":" + i2 + ":" + j2);
+//                        System.out.println(new ArtPattern(joined).toString());
                     }
                 }
             }
