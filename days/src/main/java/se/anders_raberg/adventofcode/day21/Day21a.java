@@ -33,11 +33,15 @@ public class Day21a {
             ArtPattern p1 = parse(matcher_rule.group(1));
             ArtPattern p2 = parse(matcher_rule.group(2));
 
+            
+            _ruleBook.put(p1, p2);
+            _ruleBook.put(p1.getHorzontallyFlipped(), p2);
+            _ruleBook.put(p1.getVerticallyFlipped(), p2);
             for (int i = 0; i < 5; i++) {
-                _ruleBook.put(p1, p2);
-                ArtPattern p1flipped = p1.getVerticallyFlipped();
-                _ruleBook.put(p1flipped, p2);
                 p1 = p1.getRotated();
+                _ruleBook.put(p1, p2);
+                _ruleBook.put(p1.getHorzontallyFlipped(), p2);
+                _ruleBook.put(p1.getVerticallyFlipped(), p2);
             }
         }
 
@@ -48,8 +52,9 @@ public class Day21a {
                 {"#", "#", "#"}};
 
         ArtPattern grid = new ArtPattern(start);
-
+        
         for (int c = 0; c < 5; c++) {
+            System.out.println("Round: " + c);
             ArtPattern[][] split = grid.split();
             System.out.println(grid);
             ArtPattern[][] transformedSplit = new ArtPattern[split.length][split.length];
@@ -57,18 +62,13 @@ public class Day21a {
                 for (int j = 0; j < split.length; j++) {
                     transformedSplit[i][j] = _ruleBook.get(split[i][j]);
                     if (transformedSplit[i][j] == null) {
-                        System.out.println(split[i][j]);
                         throw new IllegalArgumentException();
                     }
-//                    System.out.println(transformedSplit[i][j]);
                 }
             }
             grid = ArtPattern.joinPatterns(transformedSplit);
-//            System.out.println("c: " +c);
-//            System.out.println(grid);
         }
         
-//        System.out.println(Arrays.toString(grid.toString().split("")));
         long count = Arrays.stream(grid.toString().split("")).filter(s -> s.equals("#")).count();
         System.out.println(count);
         System.out.println(grid);

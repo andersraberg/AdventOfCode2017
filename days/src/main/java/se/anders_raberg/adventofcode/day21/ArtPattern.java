@@ -27,13 +27,24 @@ public class ArtPattern {
     public ArtPattern getVerticallyFlipped() {
         int size = _pattern.length;
         String[][] result = new String[size][size];
-        for (int i = 0; i < size; i++) {
-            result[size - i - 1] = _pattern[i];
-            result[i] = _pattern[size - i - 1];
+        for (int i = 0; i < size ; i++) {
+            result[size - i - 1] = Arrays.copyOf(_pattern[i], size);
+            result[i] = Arrays.copyOf(_pattern[size - i - 1], size);
         }
         return new ArtPattern(result);
     }
 
+    public ArtPattern getHorzontallyFlipped() {
+        int size = _pattern.length;
+        String[][] result = new String[size][size];
+        for (int i = 0; i < size ; i++) {
+            for (int j = 0; j < size; j++) {
+                result[i][j] = _pattern[i][size -1 - j];
+            }
+        }
+        return new ArtPattern(result);        
+    }
+    
     public ArtPattern[][] split() {
         ArtPattern[][] result;
         int size;
