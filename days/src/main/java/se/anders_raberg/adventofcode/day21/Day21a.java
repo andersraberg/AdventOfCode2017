@@ -32,16 +32,17 @@ public class Day21a {
             matcher_rule.find();
             ArtPattern p1 = parse(matcher_rule.group(1));
             ArtPattern p2 = parse(matcher_rule.group(2));
-
             
-            _ruleBook.put(p1, p2);
-            _ruleBook.put(p1.getHorzontallyFlipped(), p2);
-            _ruleBook.put(p1.getVerticallyFlipped(), p2);
-            for (int i = 0; i < 5; i++) {
-                p1 = p1.getRotated();
+            for (int i = 0; i < 4; i++) {
                 _ruleBook.put(p1, p2);
-                _ruleBook.put(p1.getHorzontallyFlipped(), p2);
-                _ruleBook.put(p1.getVerticallyFlipped(), p2);
+                p1 = p1.getRotated();
+            }
+
+            p1 = p1.getHorzontallyFlipped();
+            
+            for (int i = 0; i < 4; i++) {
+                _ruleBook.put(p1, p2);
+                p1 = p1.getRotated();
             }
         }
 
@@ -55,8 +56,17 @@ public class Day21a {
         
         for (int c = 0; c < 5; c++) {
             System.out.println("Round: " + c);
-            ArtPattern[][] split = grid.split();
+            System.out.println("------------");
+            System.out.println("Before split");
             System.out.println(grid);
+            ArtPattern[][] split = grid.split();
+            System.out.println("After split");
+            for (int i = 0; i < split.length; i++) {
+                for (int j = 0; j < split.length; j++) {
+                    System.out.println(i + "," + j);
+                    System.out.println(split[i][j]);
+                }
+            }
             ArtPattern[][] transformedSplit = new ArtPattern[split.length][split.length];
             for (int i = 0; i < split.length; i++) {
                 for (int j = 0; j < split.length; j++) {
@@ -66,7 +76,17 @@ public class Day21a {
                     }
                 }
             }
+
+            System.out.println("After transformation");
+            for (int i = 0; i < transformedSplit.length; i++) {
+                for (int j = 0; j < transformedSplit.length; j++) {
+                    System.out.println(i + "," + j);
+                    System.out.println(transformedSplit[i][j]);
+                }
+            }
             grid = ArtPattern.joinPatterns(transformedSplit);
+            System.out.println("After join");
+            System.out.println(grid);
         }
         
         long count = Arrays.stream(grid.toString().split("")).filter(s -> s.equals("#")).count();
