@@ -2,10 +2,8 @@ package se.anders_raberg.adventofcode.day21.test;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import se.anders_raberg.adventofcode.day21.ArtPattern;
@@ -301,11 +299,4 @@ public class ArtPatternTest {
         assertEquals(new ArtPattern(expected4), subPattern4);
 
     }
-
-    @Ignore
-    @Test
-    public void testJoinPatterns() {
-        fail("Not yet implemented");
-    }
-
 }
