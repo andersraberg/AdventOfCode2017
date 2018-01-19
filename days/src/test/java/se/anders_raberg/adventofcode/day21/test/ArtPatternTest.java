@@ -233,30 +233,47 @@ public class ArtPatternTest {
         
         
         String[][] expect00 = {
-                {"0", "1", "2"},
-                {"6", "7", "8"},
-                {"C", "D", "E"}};
+                {"0", "1"},
+                {"6", "7"}};
         
         String[][] expect01 = {
-                {"3", "4", "5"},
-                {"9", "A", "B"},
-                {"F", "G", "H"}};
+                {"2", "3"},
+                {"8", "9"}};
+        
+        String[][] expect02 = {
+                {"4", "5"},
+                {"A", "B"}};
         
         String[][] expect10 = {
-                {"I", "J", "K"},
-                {"O", "P", "Q"},
-                {"U", "V", "W"}};
+                {"C", "D"},
+                {"I", "J"}};
         
         String[][] expect11 = {
-                {"L", "M", "N"},
-                {"R", "S", "T"},
-                {"X", "Y", "Z"}};
+                {"E", "F"},
+                {"K", "L"}};
         
+        String[][] expect12 = {
+                {"G", "H"},
+                {"M", "N"}};
+        
+        String[][] expect20 = {
+                {"O", "P"},
+                {"U", "V"}};
+        
+        String[][] expect21 = {
+                {"Q", "R"},
+                {"W", "X"}};
+
+        String[][] expect22 = {
+                {"S", "T"},
+                {"Y", "Z"}};
 
         ArtPattern testee = new ArtPattern(startPattern);
         ArtPattern[][] expectedSplit = {
-                {new ArtPattern(expect00), new ArtPattern(expect01)},
-                {new ArtPattern(expect10), new ArtPattern(expect11)}};
+                {new ArtPattern(expect00), new ArtPattern(expect01), new ArtPattern(expect02)},
+                {new ArtPattern(expect10), new ArtPattern(expect11), new ArtPattern(expect12)},
+                {new ArtPattern(expect20), new ArtPattern(expect21), new ArtPattern(expect22)}};
+        
         ArtPattern[][] splitPattern = testee.split();
         assertArrayEquals(expectedSplit, splitPattern);
         assertEquals(testee, ArtPattern.joinPatterns(expectedSplit));
